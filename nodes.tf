@@ -272,8 +272,8 @@ resource "aws_eks_node_group" "general" {
   version         = var.eks_version
 
   subnet_ids = [
-    aws_subnet.public[0].id,
-    aws_subnet.public[1].id
+    aws_subnet.private[0].id,
+    aws_subnet.private[1].id
   ]
   scaling_config {
     desired_size = 1
