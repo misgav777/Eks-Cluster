@@ -9,7 +9,7 @@ pipeline{
     stages{
         stage("Initialize terraform"){
             steps{
-                dir("Jenkins"){
+                    {
                     sh "terraform init"
                 }
             }
@@ -17,7 +17,7 @@ pipeline{
 
         stage("Validate terraform"){
             steps{
-                dir("Jenkins"){
+                    {
                     sh "terraform validate"
                 }
             }
@@ -25,7 +25,7 @@ pipeline{
 
         stage("Plan terraform"){
             steps{
-                dir("Jenkins"){
+                    {
                     sh "terraform plan"
                 }
                 input(message: "Do you want to continue?", ok: "Proceed")
@@ -34,7 +34,7 @@ pipeline{
 
         stage("Destroy/Apply EKS Cluster"){
             steps{
-                dir("Jenkins"){
+                    {
                     sh "terraform $action -auto-approve"
                 }
             }
