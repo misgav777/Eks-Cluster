@@ -32,21 +32,6 @@ pipeline{
                 input(message: "Do you want to continue?", ok: "Proceed")
             }
         }
-
-        stage('Pre-destroy cleanup') {
-            when {
-                expression { params.action == 'destroy' }
-            }
-            steps {
-                sh '''
-                aws eks update-kubeconfig --name DEV-cluster --region ap-south-1
-                kubectl delete ingress --all --all-namespaces
-                kubectl delete svc --all -n argocd
-                kubectl delete -n kube-system deployment aws-load-balancer-controller
-                sleep 60  # Give AWS time to delete resources
-                '''
-            }
-        }
         
         stage("Destroy/Apply EKS Cluster"){
             steps{
