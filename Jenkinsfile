@@ -1,12 +1,5 @@
 pipeline{
     agent any
-    parameters {
-        choice(
-            name: 'action',
-            choices: ['apply', 'destroy'],
-            description: 'Action to perform: apply to create/update infrastructure, destroy to tear it down'
-        )
-    }
     environment{
         AWS_ACCESS_KEY_ID = credentials("AWS_ACCESS_KEY_ID")
         AWS_SECRET_ACCESS_KEY = credentials("AWS_SECRET_ACCESS_KEY")
